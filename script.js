@@ -224,17 +224,7 @@ function spinSlots() {
         }
         result.textContent = `🎉 You won ${winnings} gold!`;
       }
-    } else if (s1 === s2 && s2 === s3) {
-      // Full match outside of X3 condition (e.g. 3 💎)
-      switch (s1) {
-        case "🍒": winnings = 30; break;
-        case "🍋": winnings = 50; break;
-        case "🔔": winnings = 100; break;
-        case "🍀": winnings = 150; break;
-        case "💎": winnings = 300; break;
-        default: winnings = 30; break; // fallback for unknown
-      }
-      result.textContent = `🎉 Lucky triple ${s1}! You won ${winnings} gold!`;
+   
     } else if (s1 === s2 || s2 === s3 || s1 === s3) {
       winnings = 5;
       result.textContent = `✨ You matched 2 symbols! +${winnings} gold`;
