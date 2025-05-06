@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Slot Machine</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Grand Prize Display -->
+  <div class="grand-prize">
+    🎯 Grand Prize Pool: <span id="grand-prize">0</span> 💰
+  </div>
+
+  <div class="machine-container">
+    <div class="gold-info">
+        <div class="gold-display">💰 Gold: <span id="gold">100</span></div>
+        <div id="gold-timer">Next 💰x5 : 5:00</div>
+      </div>
+
+    <div class="slot-machine">
+      <div class="reel" id="slot1">🍒</div>
+      <div class="reel" id="slot2">🍋</div>
+      <div class="reel" id="slot3">🔔</div>
+      <div class="lever-container">
+        <div class="lever" id="lever"></div>
+      </div>
+    </div>
+
+    <div id="result" class="result">Pull the lever!</div>
+  </div>
+
+  <div class="prize-table">
+    <h4>🎰 Prize Table</h4>
+    <ul>
+      <li>🍒 x3 → +30 Gold</li>
+      <li>🍋 x3 → +50 Gold</li>
+      <li>🔔 x3 → +100 Gold</li>
+      <li>🍀 x3 → +150 Gold</li>
+      <li>💎 x3 → +300 Gold</li>
+      <li>7️⃣ x3 → 🏆 Grand Prize!</li>
+      <li>Any x2 → +5 Gold</li>
+    </ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
