@@ -172,6 +172,7 @@ function animateReels(s1, s2, s3, callback) {
     }, 50);
   }
 }
+
 function spinSlots() {
   if (gold < spinCost) {
     alert("Not enough gold!");
@@ -192,10 +193,10 @@ function spinSlots() {
 
   let s1, s2, s3;
   let winnings = 0;
-  let isForcedX3 = Math.random() < 0.03;
+  const isX3 = Math.random() < 0.03;
   let jackpotSymbol = null;
 
-  if (isForcedX3) {
+  if (isX3) {
     jackpotSymbol = chooseX3Symbol();
     s1 = s2 = s3 = jackpotSymbol;
   } else {
@@ -205,8 +206,9 @@ function spinSlots() {
   }
 
   animateReels(s1, s2, s3, () => {
-    const isX3 = s1 === s2 && s2 === s3; // Check actual outcome
-    if (isX3) {
+    const isTriple = s1 === s2 && s2 === s3;
+  
+    if (isTriple) {
       const symbol = s1;
       if (symbol === "7️⃣") {
         winnings = grandPrize;
@@ -222,7 +224,6 @@ function spinSlots() {
           case "🔔": winnings = 100; break;
           case "🍀": winnings = 150; break;
           case "💎": winnings = 300; break;
-          default: winnings = 0; break;
         }
         result.textContent = `🎉 You won ${winnings} gold!`;
         updateGold(winnings);
@@ -234,7 +235,7 @@ function spinSlots() {
     } else {
       result.textContent = "Try again!";
     }
-
+  
     if (winnings > 0) {
       result.classList.add('win');
     } else {
@@ -243,9 +244,8 @@ function spinSlots() {
   });
 }
 
+lever.addEventListener('click', spinSlots);
 
 // Init displays
 updateDisplays();
 updateGoldTimer();
-
-lever.addEventListener('click', spinSlots);
