@@ -172,7 +172,6 @@ function animateReels(s1, s2, s3, callback) {
     }, 50);
   }
 }
-
 function spinSlots() {
   if (gold < spinCost) {
     alert("Not enough gold!");
@@ -193,10 +192,10 @@ function spinSlots() {
 
   let s1, s2, s3;
   let winnings = 0;
-  const isX3 = Math.random() < 0.03;
+  let isForcedX3 = Math.random() < 0.03;
   let jackpotSymbol = null;
 
-  if (isX3) {
+  if (isForcedX3) {
     jackpotSymbol = chooseX3Symbol();
     s1 = s2 = s3 = jackpotSymbol;
   } else {
@@ -206,8 +205,10 @@ function spinSlots() {
   }
 
   animateReels(s1, s2, s3, () => {
+    const isX3 = s1 === s2 && s2 === s3; // Check actual outcome
     if (isX3) {
-      if (jackpotSymbol === "7️⃣") {
+      const symbol = s1;
+      if (symbol === "7️⃣") {
         winnings = grandPrize;
         result.textContent = `🎉 JACKPOT! You won the GRAND PRIZE of ${winnings} gold!`;
         updateGold(winnings);
@@ -215,33 +216,33 @@ function spinSlots() {
         grandPrizeDisplay.textContent = grandPrize;
         localStorage.setItem('grandPrize', grandPrize);
       } else {
-        switch (jackpotSymbol) {
+        switch (symbol) {
           case "🍒": winnings = 30; break;
           case "🍋": winnings = 50; break;
           case "🔔": winnings = 100; break;
           case "🍀": winnings = 150; break;
           case "💎": winnings = 300; break;
+          default: winnings = 0; break;
         }
         result.textContent = `🎉 You won ${winnings} gold!`;
+        updateGold(winnings);
       }
-   
     } else if (s1 === s2 || s2 === s3 || s1 === s3) {
       winnings = 5;
       result.textContent = `✨ You matched 2 symbols! +${winnings} gold`;
+      updateGold(winnings);
     } else {
       result.textContent = "Try again!";
     }
 
     if (winnings > 0) {
-      updateGold(winnings);
-      result.classList.add('win'); // For result text only
+      result.classList.add('win');
     } else {
       result.classList.remove('win');
     }
   });
 }
 
-lever.addEventListener('click', spinSlots);
 
 // Init displays
 updateDisplays();
