@@ -247,3 +247,5 @@ function spinSlots() {
 // Init displays
 updateDisplays();
 updateGoldTimer();
+
+lever.addEventListener('click', spinSlots);
