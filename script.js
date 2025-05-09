@@ -1,5 +1,5 @@
-let gold = parseInt(localStorage.getItem('gold')) || 100;
-let grandPrize = parseInt(localStorage.getItem('grandPrize')) || 0;
+let gold = parseInt(localStorage.getItem('gold') || '100', 10);
+let grandPrize = parseInt(localStorage.getItem('grandPrize') || '350', 10);
 
 const goldDisplay = document.getElementById('gold');
 const grandPrizeDisplay = document.getElementById('grand-prize');
@@ -184,6 +184,17 @@ function highlightWins(s1, s2, s3) {
   } else if (s1 === s3) {
     slot1.classList.add('slot-win');
     slot3.classList.add('slot-win');
+  }
+}
+
+function updateGoldDisplay() {
+  if (isNaN(gold)) gold = 100;
+  if (gold >= 210) {
+    goldDisplay.textContent = `💰 $${gold}`;
+    goldTimerDisplay.style.display = 'none';
+  } else {
+    goldDisplay.textContent = `💰 $${gold} // 210`;
+    goldTimerDisplay.style.display = 'block';
   }
 }
 
