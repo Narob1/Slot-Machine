@@ -248,3 +248,7 @@ lever.addEventListener('click', spinSlots);
 applyPassiveGold();
 updateDisplays();
 updateGoldTimer();
+setInterval(() => {
+  applyPassiveGold();
+  updateGoldTimer();
+}, 1000);
