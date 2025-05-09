@@ -14,7 +14,6 @@ const slot3 = document.getElementById('slot3');
 const symbols = ["🍒", "🍋", "🔔", "🍀", "💎", "7️⃣"];
 const spinCost = 7;
 
-// x3 match weights for a 3% match chance
 const x3WeightedSymbols = [
   { symbol: "🍒", weight: 1.2 },
   { symbol: "🍋", weight: 0.7 },
@@ -35,13 +34,23 @@ function chooseX3Symbol() {
     if (r < item.weight) return item.symbol;
     r -= item.weight;
   }
-  return "🍒"; // fallback
+  return "🍒";
 }
 
 function updateGold(amount) {
   gold += amount;
-  goldDisplay.textContent = gold;
   localStorage.setItem('gold', gold);
+  updateGoldDisplay();
+}
+
+function updateGoldDisplay() {
+  if (gold >= 210) {
+    goldDisplay.textContent = `💰 $${gold}`;
+    goldTimerDisplay.style.display = 'none';
+  } else {
+    goldDisplay.textContent = `💰 $${gold} // 210`;
+    goldTimerDisplay.style.display = 'block';
+  }
 }
 
 function updateGrandPrize(amount) {
@@ -51,7 +60,7 @@ function updateGrandPrize(amount) {
 }
 
 function updateDisplays() {
-  goldDisplay.textContent = gold;
+  updateGoldDisplay();
   grandPrizeDisplay.textContent = grandPrize;
 }
 
@@ -76,6 +85,11 @@ function applyPassiveGold() {
 }
 
 function updateGoldTimer() {
+  if (gold >= 210) {
+    goldTimerDisplay.style.display = 'none';
+    return;
+  }
+
   const now = Date.now();
   const lastCollected = parseInt(localStorage.getItem('lastGoldTime')) || now;
   const msUntilNext = 60 * 60 * 1000 - (now - lastCollected) % (60 * 60 * 1000);
@@ -244,7 +258,7 @@ function spinSlots() {
 
 lever.addEventListener('click', spinSlots);
 
-// Init displays and apply offline passive income
+// Init
 applyPassiveGold();
 updateDisplays();
 updateGoldTimer();
