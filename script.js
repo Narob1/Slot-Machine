@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
       goldDisplay.textContent = `💰 $${gold}`;
       goldTimerDisplay.style.display = 'none';
     } else {
-      goldDisplay.textContent = `💰 $${gold} // 210`;
+      goldDisplay.textContent = `💰    $${gold} // 210`;
       goldTimerDisplay.style.display = 'block';
     }
   }
