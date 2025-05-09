@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const slot3 = document.getElementById('slot3');
 
   const symbols = ["🍒", "🍋", "🔔", "🍀", "💎", "7️⃣"];
-  const spinCost = 0;
+  const spinCost = 7;
 
   const x3WeightedSymbols = [
     { symbol: "🍒", weight: 1.2 },
