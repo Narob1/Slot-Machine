@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   let gold = parseInt(localStorage.getItem('gold') || '100', 10);
-  let grandPrize = parseInt(localStorage.getItem('grandPrize') || '0', 10);
+  let grandPrize = parseInt(localStorage.getItem('grandPrize') || '350', 10);
 
   const goldDisplay = document.getElementById('gold');
   const grandPrizeDisplay = document.getElementById('grand-prize');
